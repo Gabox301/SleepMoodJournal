@@ -1,0 +1,78 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SleepMoodJournal.ViewModels"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+             x:Class="SleepMoodJournal.Views.TrendsView"
+             x:DataType="vm:TrendsViewModel">
+
+  <ScrollViewer>
+    <StackPanel Spacing="22">
+
+      <StackPanel>
+        <TextBlock Classes="eyebrow" Text="Panorama" />
+        <TextBlock Classes="pageTitle" Text="Tus tendencias" />
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="14">
+        <TextBlock Text="Período" Classes="fieldLabel" VerticalAlignment="Center" />
+        <Border CornerRadius="999" Padding="4"
+                Background="{StaticResource PressBrush}"
+                BorderBrush="{StaticResource BorderSoftBrush}" BorderThickness="1">
+          <StackPanel Orientation="Horizontal" Spacing="4">
+            <RadioButton Classes="seg" Content="7d" Command="{Binding SetPeriodCommand}" CommandParameter="7" />
+            <RadioButton Classes="seg" Content="30d" IsChecked="True" Command="{Binding SetPeriodCommand}" CommandParameter="30" />
+            <RadioButton Classes="seg" Content="90d" Command="{Binding SetPeriodCommand}" CommandParameter="90" />
+            <RadioButton Classes="seg" Content="365d" Command="{Binding SetPeriodCommand}" CommandParameter="365" />
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <Border Classes="card">
+        <StackPanel Spacing="6">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="chartTitle" Text="Sueño (horas)" />
+            <TextBlock Grid.Column="1" Classes="sideSub" VerticalAlignment="Bottom" Text="{Binding SleepAvgText}" />
+          </Grid>
+          <lvc:CartesianChart Height="210" Series="{Binding SleepSeries}" XAxes="{Binding XAxes}"
+                              Background="Transparent" Margin="0,10,0,0" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="6">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="chartTitle" Text="Ánimo (1-5)" />
+            <TextBlock Grid.Column="1" Classes="sideSub" VerticalAlignment="Bottom" Text="{Binding MoodAvgText}" />
+          </Grid>
+          <lvc:CartesianChart Height="210" Series="{Binding MoodSeries}" XAxes="{Binding XAxes}"
+                              Background="Transparent" Margin="0,10,0,0" />
+        </StackPanel>
+      </Border>
+
+      <Grid ColumnDefinitions="*,*,*">
+        <Border Classes="statBox" Margin="0,0,8,0">
+          <StackPanel>
+            <TextBlock Classes="statKey" Text="Promedio sueño" />
+            <TextBlock Classes="valueBig moonValue" Margin="0,6,0,0" Text="{Binding StatSleep}" />
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Classes="statBox" Margin="8,0,8,0">
+          <StackPanel>
+            <TextBlock Classes="statKey" Text="Promedio ánimo" />
+            <TextBlock Classes="valueBig duskValue" Margin="0,6,0,0" Text="{Binding StatMood}" />
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Classes="statBox" Margin="8,0,0,0">
+          <StackPanel>
+            <TextBlock Classes="statKey" Text="Días registrados" />
+            <TextBlock Classes="valueBig" Margin="0,6,0,0" Text="{Binding StatDays}" />
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <TextBlock Classes="sideSub" TextWrapping="Wrap" Text="{Binding SummaryText}" Margin="2,0,0,8" />
+
+    </StackPanel>
+  </ScrollViewer>
+
+</UserControl>

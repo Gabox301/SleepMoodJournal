@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- ================= Colores (maqueta) ================= -->
+  <Color x:Key="Bg0">#0A0C16</Color>
+  <Color x:Key="PanelBg">#12162A</Color>
+  <Color x:Key="Ink0">#F2EEE6</Color>
+  <Color x:Key="Ink1">#B9B8C8</Color>
+  <Color x:Key="Ink2">#7D7D92</Color>
+  <Color x:Key="Moon">#F2C879</Color>
+  <Color x:Key="MoonDeep">#DFA347</Color>
+  <Color x:Key="Dusk">#8B7CF6</Color>
+  <Color x:Key="Rose">#F0788A</Color>
+  <Color x:Key="Ok">#7FD9A8</Color>
+
+  <!-- ================= Brushes ================= -->
+  <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Bg0}" />
+  <SolidColorBrush x:Key="PanelBrush" Color="{StaticResource PanelBg}" />
+  <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource Ink0}" />
+  <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Ink1}" />
+  <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource Ink2}" />
+  <SolidColorBrush x:Key="MoonBrush" Color="{StaticResource Moon}" />
+  <SolidColorBrush x:Key="DuskBrush" Color="{StaticResource Dusk}" />
+  <SolidColorBrush x:Key="RoseBrush" Color="{StaticResource Rose}" />
+  <SolidColorBrush x:Key="OkBrush" Color="{StaticResource Ok}" />
+
+  <!-- Bordes difuminados (simulan rgba blanco) -->
+  <SolidColorBrush x:Key="BorderSoftBrush" Color="#14FFFFFF" />
+  <SolidColorBrush x:Key="BorderStrongBrush" Color="#24FFFFFF" />
+  <SolidColorBrush x:Key="TrackBrush" Color="#14FFFFFF" />
+  <SolidColorBrush x:Key="PressBrush" Color="#0AFFFFFF" />
+
+  <!-- Tint moon/dusk suaves -->
+  <SolidColorBrush x:Key="MoonSoftBrush" Color="#29F2C879" />
+  <SolidColorBrush x:Key="DuskSoftBrush" Color="#298B7CF6" />
+
+  <!-- Fondo de tarjeta degradado -->
+  <LinearGradientBrush x:Key="CardBgBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="#1C2138" />
+    <GradientStop Offset="1" Color="#151A30" />
+  </LinearGradientBrush>
+
+  <!-- Fondo de ventana: base + dos radiales moon/dusk -->
+  <RadialGradientBrush x:Key="WindowBgBrush" GradientOrigin="82%,-8%" Center="82%,-8%">
+    <GradientStop Offset="0" Color="#338B7CF6" />
+    <GradientStop Offset="0.4" Color="#08F2C879" />
+    <GradientStop Offset="1" Color="#0A0C16" />
+  </RadialGradientBrush>
+
+  <!-- Botones -->
+  <LinearGradientBrush x:Key="MoonGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="#F2C879" />
+    <GradientStop Offset="1" Color="#E2A94F" />
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="DuskGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+    <GradientStop Offset="0" Color="#8B7CF6" />
+    <GradientStop Offset="1" Color="#6B5AE8" />
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="OnPrimaryBrush" Color="#241705" />
+  <SolidColorBrush x:Key="OnAccentBrush" Color="#FFFFFF" />
+
+  <!-- ================= Sombras / glow ================= -->
+  <BoxShadow x:Key="CardShadow">0 20 60 -20 #A6000000</BoxShadow>
+  <BoxShadow x:Key="MoonGlow">0 0 26 0 #59F2C879</BoxShadow>
+  <BoxShadow x:Key="DuskGlow">0 0 26 0 #598B7CF6</BoxShadow>
+  <BoxShadow x:Key="PanelShadow">0 10 30 -12 #99000000</BoxShadow>
+
+  <!-- ================= Tipografías (nombres de familia reales) ================= -->
+  <x:String x:Key="ManropeFont">avares://SleepMoodJournal/Assets/Fonts/Manrope-Regular.ttf#Manrope</x:String>
+  <x:String x:Key="ManropeSemiBoldFont">avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold</x:String>
+  <x:String x:Key="ManropeExtraBoldFont">avares://SleepMoodJournal/Assets/Fonts/Manrope-ExtraBold.ttf#Manrope ExtraBold</x:String>
+  <x:String x:Key="FrauncesFont">avares://SleepMoodJournal/Assets/Fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf#Fraunces 9pt</x:String>
+
+  <!-- ================= Radios y tamaños ================= -->
+  <x:Double x:Key="RadiusLarge">22</x:Double>
+  <x:Double x:Key="RadiusMedium">14</x:Double>
+  <x:Double x:Key="RadiusSmall">9</x:Double>
+  <x:Double x:Key="CardPadding">26</x:Double>
+
+</ResourceDictionary>

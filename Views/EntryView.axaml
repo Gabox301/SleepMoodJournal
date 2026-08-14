@@ -1,0 +1,131 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SleepMoodJournal.ViewModels"
+             x:Class="SleepMoodJournal.Views.EntryView"
+             x:DataType="vm:EntryViewModel">
+
+  <ScrollViewer>
+    <StackPanel Spacing="20">
+
+      <StackPanel>
+        <TextBlock Classes="eyebrow" Text="Registro diario" />
+        <TextBlock Classes="pageTitle" Text="¿Cómo dormiste hoy?" />
+        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,2,0,4">
+          <Border HorizontalAlignment="Left" CornerRadius="20" BorderBrush="{StaticResource BorderSoftBrush}" BorderThickness="1" Background="{StaticResource PressBrush}">
+            <TextBlock Text="{Binding Date, StringFormat='{}{0:dd}'}"
+                       FontFamily="avares://SleepMoodJournal/Assets/Fonts/Manrope-ExtraBold.ttf#Manrope ExtraBold"
+                       FontWeight="ExtraBold" FontSize="16" Margin="18,11" />
+          </Border>
+          <TextBlock Text="{Binding Date, StringFormat='{}{0:dddd, dd MMMM}'}"
+                     Classes="sideSub" VerticalAlignment="Center" />
+        </StackPanel>
+      </StackPanel>
+
+      <Grid ColumnDefinitions="1.15*,0.85*">
+
+        <Border Classes="card" Margin="0,0,11,0">
+          <StackPanel Spacing="30">
+
+            <StackPanel>
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="chartTitle" Text="Horas de sueño" />
+                <TextBlock Grid.Column="1" Classes="valueBig moonValue"
+                           Text="{Binding SleepHoursDisplay}" />
+              </Grid>
+              <Slider Minimum="0" Maximum="12" TickFrequency="0.5" IsSnapToTickEnabled="True"
+                      Value="{Binding SleepHours}"
+                      Foreground="{StaticResource MoonBrush}"
+                      Margin="0,18,0,2" />
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <TextBlock Text="0h" Classes="statKey" />
+                <TextBlock Grid.Column="1" Text="6h" Classes="statKey" HorizontalAlignment="Center" />
+                <TextBlock Grid.Column="2" Text="12h" Classes="statKey" HorizontalAlignment="Right" />
+              </Grid>
+            </StackPanel>
+
+            <StackPanel>
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="chartTitle" Text="Calidad del sueño" />
+                <TextBlock Grid.Column="1" Classes="valueBig moonValue"
+                           Text="{Binding SleepQuality, StringFormat='{}{0}/5'}" />
+              </Grid>
+              <Slider Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"
+                      Value="{Binding SleepQuality}"
+                      Foreground="{StaticResource MoonBrush}"
+                      Margin="0,18,0,2" />
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <TextBlock Text="Mala" Classes="statKey" />
+                <TextBlock Grid.Column="1" Text="Regular" Classes="statKey" HorizontalAlignment="Center" />
+                <TextBlock Grid.Column="2" Text="Excelente" Classes="statKey" HorizontalAlignment="Right" />
+              </Grid>
+            </StackPanel>
+
+            <StackPanel>
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Classes="chartTitle" Text="Ánimo" />
+                <TextBlock Grid.Column="1" Classes="valueBig duskValue"
+                           Text="{Binding Mood, StringFormat='{}{0}/5'}" />
+              </Grid>
+              <Slider Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"
+                      Value="{Binding Mood}"
+                      Foreground="{StaticResource DuskBrush}"
+                      Margin="0,18,0,2" />
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <TextBlock Text="Bajo" Classes="statKey" />
+                <TextBlock Grid.Column="1" Text="Neutral" Classes="statKey" HorizontalAlignment="Center" />
+                <TextBlock Grid.Column="2" Text="Genial" Classes="statKey" HorizontalAlignment="Right" />
+              </Grid>
+            </StackPanel>
+
+            <StackPanel>
+              <TextBlock Classes="fieldLabel" Text="Notas (opcional)" />
+              <TextBox Classes="notes" Text="{Binding Notes}"
+                       Watermark="Ej: mucho café, buen ejercicio, estrés en el trabajo..." />
+            </StackPanel>
+
+            <Button Classes="primary" Content="Guardar registro" Command="{Binding SaveCommand}" />
+            <TextBlock Text="{Binding StatusMessage}" Classes="sideSub"
+                       HorizontalAlignment="Center" TextWrapping="Wrap" />
+
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Classes="card" Margin="11,0,0,0">
+          <StackPanel Spacing="22">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+              <Border Width="62" Height="62" CornerRadius="31">
+                <Border.Background>
+                  <ConicGradientBrush Angle="-90">
+                    <GradientStop Offset="0.66" Color="{StaticResource Moon}" />
+                    <GradientStop Offset="0.66" Color="#14000000" />
+                  </ConicGradientBrush>
+                </Border.Background>
+                <Border Background="{StaticResource PanelBg}" CornerRadius="23" Margin="7">
+                  <TextBlock Text="{Binding Mood, StringFormat='{}{0}/5'}"
+                             HorizontalAlignment="Center" VerticalAlignment="Center"
+                             FontFamily="avares://SleepMoodJournal/Assets/Fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf#Fraunces 9pt" FontStyle="Italic" FontSize="16" />
+                </Border>
+              </Border>
+              <StackPanel VerticalAlignment="Center">
+                <TextBlock Classes="chartTitle" FontSize="17" Text="{Binding SummaryTitle}" />
+                <TextBlock Classes="sideSub" Text="Según lo registrado hoy" />
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel>
+              <TextBlock Classes="fieldLabel" Text="Promedio (últimos 7 días)" />
+              <TextBlock Classes="sideSub" TextWrapping="Wrap" Text="{Binding SevenDayText}" />
+            </StackPanel>
+
+            <StackPanel>
+              <TextBlock Classes="fieldLabel" Text="Racha de registros" />
+              <TextBlock Classes="sideSub" TextWrapping="Wrap" Text="{Binding StreakText}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+      </Grid>
+    </StackPanel>
+  </ScrollViewer>
+
+</UserControl>

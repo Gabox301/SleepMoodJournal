@@ -1,0 +1,98 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="using:SleepMoodJournal.ViewModels"
+			 xmlns:conv="using:SleepMoodJournal.Converters"
+			 x:Class="SleepMoodJournal.Views.CalendarView"
+			 x:Name="root"
+			 x:DataType="vm:CalendarViewModel">
+
+  <UserControl.Resources>
+    <conv:SleepHeatBrushConverter x:Key="SleepHeat" />
+    <conv:MoodDotBrushConverter x:Key="MoodDot" />
+  </UserControl.Resources>
+
+  <ScrollViewer>
+    <StackPanel Spacing="22">
+      <StackPanel>
+        <TextBlock Classes="eyebrow" Text="Historial" />
+        <TextBlock Classes="pageTitle" Text="Calendario" />
+      </StackPanel>
+
+      <Border Classes="card" MaxWidth="620" HorizontalAlignment="Left">
+        <StackPanel Spacing="14">
+
+          <!-- Cabecera del mes -->
+          <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,8">
+            <Button Classes="iconbtn" Content="◀" Command="{Binding PrevMonthCommand}" />
+            <TextBlock Grid.Column="1" Text="{Binding MonthDisplay}"
+                       Classes="chartTitle" FontSize="20"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Grid.Column="2" Classes="iconbtn" Content="▶" Command="{Binding NextMonthCommand}" />
+          </Grid>
+
+          <!-- Días de la semana -->
+          <Grid ColumnDefinitions="*,*,*,*,*,*,*">
+            <TextBlock Text="Lun" Classes="statKey" TextAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="Mar" Classes="statKey" TextAlignment="Center" />
+            <TextBlock Grid.Column="2" Text="Mié" Classes="statKey" TextAlignment="Center" />
+            <TextBlock Grid.Column="3" Text="Jue" Classes="statKey" TextAlignment="Center" />
+            <TextBlock Grid.Column="4" Text="Vie" Classes="statKey" TextAlignment="Center" />
+            <TextBlock Grid.Column="5" Text="Sáb" Classes="statKey" TextAlignment="Center" />
+            <TextBlock Grid.Column="6" Text="Dom" Classes="statKey" TextAlignment="Center" />
+          </Grid>
+
+          <!-- Celdas del mes -->
+          <ItemsControl ItemsSource="{Binding Days}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <UniformGrid Columns="7" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate DataType="vm:CalendarDay">
+                <Button Click="OnDayClicked" Margin="3"
+                        Classes="daycell"
+                        Padding="6"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch">
+                  <Button.Background>
+                    <Binding Path="SleepHours" Converter="{StaticResource SleepHeat}" />
+                  </Button.Background>
+                  <Grid Margin="0">
+                    <TextBlock Text="{Binding Date.Day}" Classes="daynum"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Ellipse Width="7" Height="7" Margin="0,0,3,3"
+                             HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                             IsVisible="{Binding HasEntry}">
+                      <Ellipse.Fill>
+                        <Binding Path="Mood" Converter="{StaticResource MoodDot}" />
+                      </Ellipse.Fill>
+                    </Ellipse>
+                  </Grid>
+                </Button>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+
+          <!-- Leyenda -->
+          <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,10,0,0">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Border Width="12" Height="12" CornerRadius="3" Background="{StaticResource MoonSoftBrush}" />
+              <TextBlock Classes="sideSub" Text="Poco sueño" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Border Width="12" Height="12" CornerRadius="3" Background="{StaticResource MoonBrush}" />
+              <TextBlock Classes="sideSub" Text="Buen descanso" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Border Width="8" Height="8" CornerRadius="4" Background="{StaticResource DuskBrush}" VerticalAlignment="Center" />
+              <TextBlock Classes="sideSub" Text="Punto = ánimo" VerticalAlignment="Center" />
+            </StackPanel>
+          </StackPanel>
+
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+
+</UserControl>

@@ -1,0 +1,299 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SleepMoodJournal.ViewModels"
+             xmlns:views="using:SleepMoodJournal.Views"
+             x:Class="SleepMoodJournal.App"
+             RequestedThemeVariant="Dark">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://SleepMoodJournal/Styles/Design.axaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.DataTemplates>
+    <DataTemplate DataType="vm:EntryViewModel">
+      <views:EntryView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:TrendsViewModel">
+      <views:TrendsView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:CalendarViewModel">
+      <views:CalendarView />
+    </DataTemplate>
+  </Application.DataTemplates>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <!-- CUSTOM_STYLES_START -->
+
+    <!-- ============ Base ============ -->
+    <Style Selector="Window">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-Regular.ttf#Manrope" />
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+      <Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    </Style>
+
+    <!-- ============ Tipografía global ============ -->
+    <Style Selector="TextBlock.pageTitle">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf#Fraunces 9pt" />
+      <Setter Property="FontStyle" Value="Italic" />
+      <Setter Property="FontSize" Value="34" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="Margin" Value="0,0,0,26" />
+    </Style>
+
+    <Style Selector="TextBlock.eyebrow">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="LetterSpacing" Value="2" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{StaticResource DuskBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.fieldLabel">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="LetterSpacing" Value="1.5" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.chartTitle">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf#Fraunces 9pt" />
+      <Setter Property="FontStyle" Value="Italic" />
+      <Setter Property="FontSize" Value="19" />
+    </Style>
+
+    <Style Selector="TextBlock.valueBig">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-ExtraBold.ttf#Manrope ExtraBold" />
+      <Setter Property="FontSize" Value="24" />
+      <Setter Property="FontWeight" Value="ExtraBold" />
+    </Style>
+
+    <Style Selector="TextBlock.statKey">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="LetterSpacing" Value="1.2" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.moonValue">
+      <Setter Property="Foreground" Value="{StaticResource MoonBrush}" />
+    </Style>
+    <Style Selector="TextBlock.duskValue">
+      <Setter Property="Foreground" Value="{StaticResource DuskBrush}" />
+    </Style>
+    <Style Selector="TextBlock.sideSub">
+      <Setter Property="FontSize" Value="12.5" />
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+    </Style>
+
+    <!-- ============ Tarjetas ============ -->
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{StaticResource CardBgBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource BorderSoftBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="22" />
+      <Setter Property="BoxShadow" Value="0 20 60 -20 #A6000000" />
+      <Setter Property="Padding" Value="28,24" />
+    </Style>
+
+    <Style Selector="Border.statBox">
+      <Setter Property="Background" Value="{StaticResource PressBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource BorderSoftBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="14" />
+      <Setter Property="Padding" Value="16,14" />
+    </Style>
+
+    <!-- CUSTOM_STYLES_2 -->
+
+    <!-- ============ Botón primario (píldora moon) ============ -->
+    <Style Selector="Button.primary">
+      <Setter Property="Background" Value="{StaticResource MoonGradientBrush}" />
+      <Setter Property="Foreground" Value="{StaticResource OnPrimaryBrush}" />
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-ExtraBold.ttf#Manrope ExtraBold" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="ExtraBold" />
+      <Setter Property="Padding" Value="26,12" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="Button">
+          <Border Background="{TemplateBinding Background}"
+                  CornerRadius="999"
+                  Padding="{TemplateBinding Padding}"
+                  Margin="0,20,0,0">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ Border">
+      <Setter Property="Background" Value="{StaticResource DuskGradientBrush}" />
+    </Style>
+
+    <!-- ============ Botón fantasma / secundario ============ -->
+    <Style Selector="Button.ghost">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}" />
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="Padding" Value="16,9" />
+      <Setter Property="CornerRadius" Value="999" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="{StaticResource BorderSoftBrush}" />
+    </Style>
+    <Style Selector="Button.ghost:pointerover">
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+      <Setter Property="Background" Value="{StaticResource PressBrush}" />
+    </Style>
+
+    <!-- ============ Botón de icono circular ============ -->
+    <Style Selector="Button.iconbtn">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}" />
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="FontSize" Value="18" />
+    </Style>
+    <Style Selector="Button.iconbtn:pointerover">
+      <Setter Property="Background" Value="{StaticResource PressBrush}" />
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    </Style>
+
+    <!-- ============ Botón segmentado (período) ============ -->
+    <Style Selector="Button.seg">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="12.5" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Padding" Value="14,7" />
+      <Setter Property="CornerRadius" Value="999" />
+    </Style>
+    <Style Selector="Button.seg:pointerover">
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    </Style>
+    <Style Selector="Button.seg.active">
+      <Setter Property="Background" Value="{StaticResource DuskBrush}" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+
+    <!-- CUSTOM_STYLES_3 -->
+
+    <!-- ============ Navegación lateral (rail) ============ -->
+    <Style Selector="RadioButton.rail">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="10.5" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Width" Value="60" />
+      <Setter Property="Padding" Value="0,9" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="RadioButton">
+          <Border Background="{TemplateBinding Background}"
+                  CornerRadius="14"
+                  Padding="{TemplateBinding Padding}">
+            <StackPanel Spacing="6" HorizontalAlignment="Center">
+              <ContentControl Content="{TemplateBinding Tag}" HorizontalAlignment="Center" />
+              <ContentPresenter Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                HorizontalAlignment="Center" />
+            </StackPanel>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="RadioButton.rail:pointerover">
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+      <Setter Property="Background" Value="{StaticResource PressBrush}" />
+    </Style>
+    <Style Selector="RadioButton.rail:checked">
+      <Setter Property="Foreground" Value="#0A0C16" />
+      <Setter Property="Background" Value="{StaticResource MoonGradientBrush}" />
+    </Style>
+
+    <!-- ============ Campo de notas ============ -->
+    <Style Selector="TextBox.notes">
+      <Setter Property="Background" Value="#2E000000" />
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource BorderSoftBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="9" />
+      <Setter Property="Padding" Value="14,12" />
+      <Setter Property="MinHeight" Value="92" />
+      <Setter Property="AcceptsReturn" Value="True" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!-- ============ Celdas de calendario (heatmap) ============ -->
+    <Style Selector="Button.daycell">
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="{StaticResource BorderSoftBrush}" />
+      <Setter Property="Height" Value="44" />
+      <Setter Property="Background" Value="{StaticResource PressBrush}" />
+    </Style>
+    <Style Selector="Button.daycell:pointerover">
+      <Setter Property="BorderBrush" Value="{StaticResource BorderStrongBrush}" />
+    </Style>
+    <Style Selector="TextBlock.daynum">
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}" />
+    </Style>
+
+    <!-- ============ Tabs segmentadas (RadioButton) ============ -->
+    <Style Selector="RadioButton.seg">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+      <Setter Property="FontFamily" Value="avares://SleepMoodJournal/Assets/Fonts/Manrope-SemiBold.ttf#Manrope SemiBold" />
+      <Setter Property="FontSize" Value="12.5" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Padding" Value="15,7" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="RadioButton">
+          <Border Background="{TemplateBinding Background}" CornerRadius="999" Padding="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="RadioButton.seg:pointerover">
+      <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+    </Style>
+    <Style Selector="RadioButton.seg:checked">
+      <Setter Property="Background" Value="{StaticResource DuskBrush}" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+
+    <!-- CUSTOM_STYLES_END -->
+
+  </Application.Styles>
+
+</Application>

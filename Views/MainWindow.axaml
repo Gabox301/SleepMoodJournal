@@ -1,0 +1,64 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SleepMoodJournal.ViewModels"
+        x:Class="SleepMoodJournal.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Diario de Sueño y Ánimo"
+        Width="1040" Height="720"
+        MinWidth="820" MinHeight="560">
+
+  <DockPanel>
+
+    <!-- ===== Rail de navegación lateral ===== -->
+    <Border DockPanel.Dock="Left"
+            Width="86"
+            BorderBrush="{StaticResource BorderSoftBrush}"
+            BorderThickness="0,0,1,0">
+      <StackPanel Margin="0,26,0,0" HorizontalAlignment="Center" Spacing="6">
+
+        <!-- Marca -->
+        <Border Width="40" Height="40" CornerRadius="12" Margin="0,0,0,22">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,130%">
+              <GradientStop Offset="0" Color="{StaticResource Dusk}" />
+              <GradientStop Offset="1" Color="{StaticResource Moon}" />
+            </LinearGradientBrush>
+          </Border.Background>
+        </Border>
+
+        <RadioButton Classes="rail" GroupName="nav" IsChecked="True" Command="{Binding ShowEntryCommand}">
+          <RadioButton.Tag>
+            <TextBlock Text="🌙" FontSize="17" />
+          </RadioButton.Tag>
+          Hoy
+        </RadioButton>
+
+        <RadioButton Classes="rail" GroupName="nav" Command="{Binding ShowTrendsCommand}">
+          <RadioButton.Tag>
+            <TextBlock Text="📈" FontSize="17" />
+          </RadioButton.Tag>
+          Tendencias
+        </RadioButton>
+
+        <RadioButton Classes="rail" GroupName="nav" Command="{Binding ShowCalendarCommand}">
+          <RadioButton.Tag>
+            <TextBlock Text="🗓️" FontSize="17" />
+          </RadioButton.Tag>
+          Calendario
+        </RadioButton>
+
+      </StackPanel>
+    </Border>
+
+    <!-- ===== Contenido ===== -->
+    <DockPanel Margin="42,30,48,30">
+      <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="9" Margin="0,0,0,8">
+        <TextBlock Text="☾" FontSize="15" Foreground="{StaticResource MoonBrush}" />
+        <TextBlock Text="Diario de Sueño y Ánimo" Classes="sideSub" VerticalAlignment="Center" />
+      </StackPanel>
+
+      <ContentControl Content="{Binding CurrentView}" />
+    </DockPanel>
+
+  </DockPanel>
+</Window>

@@ -1,0 +1,39 @@
+# ====================== .NET / build ======================
+bin/
+obj/
+publish/
+Publish/
+artifacts/
+*.user
+
+# ====================== Test / cobertura ======================
+TestResults/
+coverage.*
+*.coverage.xml
+coverage.json
+
+# ====================== IDE / editores ======================
+.vs/
+.vscode/
+.idea/
+*.suo
+*.userosscache
+*.sln.docstates
+*.swp
+*~
+
+# ====================== Sistema operativo ======================
+Thumbs.db
+Desktop.ini
+.DS_Store
+ehthumbs.db
+
+# ====================== Datos locales / runtime ======================
+# La base de datos vive fuera del repo (en %LocalAppData%),
+# pero por seguridad no se sube ningún *.db ni logs.
+*.db
+*.db-journal
+*.log
+
+# ====================== Documentación Interna ======================
+docs/
