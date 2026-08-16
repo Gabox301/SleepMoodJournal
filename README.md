@@ -32,17 +32,17 @@ La base SQLite se guarda en `%LocalAppData%/SleepMoodJournal/journal.db`
 ## Funcionalidades core (v1)
 
 - **Registro diario**
-  - Horas de sueño (0-12, con decimales).
-  - Calidad del sueño (escala 1-5).
-  - Estado de ánimo (escala 1-5).
-  - Notas libres opcionales.
-  - Un solo registro por día (índice único por fecha); si ya existe, se edita.
+    - Horas de sueño (0-12, con decimales).
+    - Calidad del sueño (escala 1-5).
+    - Estado de ánimo (escala 1-5).
+    - Notas libres opcionales.
+    - Un solo registro por día (índice único por fecha); si ya existe, se edita.
 - **Vista de tendencias**
-  - Gráfico de línea de horas de sueño en el tiempo.
-  - Gráfico de línea de estado de ánimo en el tiempo.
-  - Selector de rango (7/30/90/365 días vía `DaysToShow`).
-  - Promedios del período.
-  - Correlación simple: ánimo promedio en días de "buen sueño" (≥7h) vs. el resto.
+    - Gráfico de línea de horas de sueño en el tiempo.
+    - Gráfico de línea de estado de ánimo en el tiempo.
+    - Selector de rango (7/30/90/365 días vía `DaysToShow`).
+    - Promedios del período.
+    - Correlación simple: ánimo promedio en días de "buen sueño" (≥7h) vs. el resto.
 
 ## Features para sumar después
 
@@ -107,7 +107,27 @@ dotnet format whitespace SleepMoodJournal.csproj --verify-no-changes
 
 # Aplicar correcciones automáticamente:
 dotnet format SleepMoodJournal.csproj
+dotnet format SleepMoodJournal.Tests/SleepMoodJournal.Tests.csproj
 ```
+
+## Tests
+
+Los tests unitarios con xUnit viven en `SleepMoodJournal.Tests/`. Usan la
+misma base SQLite de la app pero **en memoria**, así que no tocan el archivo
+`journal.db` real. Corren sobre el proyecto completo y no requieren la UI.
+
+```bash
+# Ejecutar la suite (desde la solución o desde el proyecto de tests):
+dotnet test SleepMoodJournal.slnx
+dotnet test SleepMoodJournal.Tests/SleepMoodJournal.Tests.csproj
+
+# Filtrar solo una clase o un test por nombre:
+dotnet test SleepMoodJournal.slnx --filter "EntryViewModelTests"
+```
+
+Cubren: `AppTime` (redondeo y reloj inyectado), `AppDbContext` (round-trip e
+índice único por fecha) y los cuatro ViewModels (entrada, tendencias,
+calendario y navegación de la ventana principal).
 
 ## Generar ejecutable single-file
 
