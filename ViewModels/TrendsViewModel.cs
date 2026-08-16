@@ -39,14 +39,22 @@ public partial class TrendsViewModel : ViewModelBase
     public ISeries[] MoodSeries { get; private set; } = [];
     public Axis[] XAxes { get; private set; } = [];
 
+    private readonly Func<AppDbContext> _dbFactory;
+
     public TrendsViewModel()
+        : this(static () => new AppDbContext())
     {
+    }
+
+    public TrendsViewModel(Func<AppDbContext> dbFactory)
+    {
+        _dbFactory = dbFactory;
         Reload();
     }
 
     public void Reload()
     {
-        using var db = new AppDbContext();
+        using var db = _dbFactory();
         var since = AppTime.Today.AddDays(-DaysToShow);
 
         var entries = db.Entries
@@ -116,7 +124,7 @@ public partial class TrendsViewModel : ViewModelBase
 
         StatSleep = $"{avgSleep:0.0}h";
         StatMood = $"{avgMood:0.0}/5";
-        StatDays = $"{entries.Count} días";
+        StatDays = $"{entries.Count} {(entries.Count == 1 ? "día" : "días")}";
         SleepAvgText = $"promedio {avgSleep:0.0}h";
         MoodAvgText = $"promedio {avgMood:0.0}";
 

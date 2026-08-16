@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+using SleepMoodJournal.Data;
+
 namespace SleepMoodJournal.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
@@ -13,10 +15,15 @@ public partial class MainWindowViewModel : ViewModelBase
     public CalendarViewModel CalendarViewModel { get; }
 
     public MainWindowViewModel()
+        : this(static () => new AppDbContext())
     {
-        EntryViewModel = new EntryViewModel();
-        TrendsViewModel = new TrendsViewModel();
-        CalendarViewModel = new CalendarViewModel();
+    }
+
+    public MainWindowViewModel(Func<AppDbContext> dbFactory)
+    {
+        EntryViewModel = new EntryViewModel(dbFactory);
+        TrendsViewModel = new TrendsViewModel(dbFactory);
+        CalendarViewModel = new CalendarViewModel(dbFactory);
         _currentView = EntryViewModel;
 
         // Cuando se guarda un registro nuevo, refrescamos los gráficos de tendencia.

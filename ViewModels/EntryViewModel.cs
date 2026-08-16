@@ -54,8 +54,16 @@ public partial class EntryViewModel : ViewModelBase
     /// <summary>Se dispara cuando se guarda un registro, para que otras vistas se actualicen.</summary>
     public event EventHandler? EntrySaved;
 
+    private readonly Func<AppDbContext> _dbFactory;
+
     public EntryViewModel()
+        : this(static () => new AppDbContext())
     {
+    }
+
+    public EntryViewModel(Func<AppDbContext> dbFactory)
+    {
+        _dbFactory = dbFactory;
         Load(AppTime.Today);
     }
 
@@ -67,7 +75,7 @@ public partial class EntryViewModel : ViewModelBase
         // Ajusta la propiedad Date (DatePicker) al comienzo del día local
         Date = new DateTimeOffset(date.ToDateTime(TimeOnly.MinValue, DateTimeKind.Local));
 
-        using var db = new AppDbContext();
+        using var db = _dbFactory();
         var existing = db.Entries.FirstOrDefault(e => e.Date == date);
         if (existing is null)
         {
@@ -94,7 +102,7 @@ public partial class EntryViewModel : ViewModelBase
     {
         var date = DateOnly.FromDateTime(Date.DateTime);
 
-        using var db = new AppDbContext();
+        using var db = _dbFactory();
         var entry = await db.Entries.FirstOrDefaultAsync(e => e.Date == date);
 
         if (entry is null)
@@ -128,7 +136,7 @@ public partial class EntryViewModel : ViewModelBase
             _ => "Muy poco sueño",
         };
 
-        using var db = new AppDbContext();
+        using var db = _dbFactory();
         var today = AppTime.Today;
 
         var recent = db.Entries

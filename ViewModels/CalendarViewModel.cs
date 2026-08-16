@@ -20,8 +20,16 @@ public partial class CalendarViewModel : ViewModelBase
 
     public event EventHandler<DateOnly>? DateSelected;
 
+    private readonly Func<AppDbContext> _dbFactory;
+
     public CalendarViewModel()
+        : this(static () => new AppDbContext())
     {
+    }
+
+    public CalendarViewModel(Func<AppDbContext> dbFactory)
+    {
+        _dbFactory = dbFactory;
         var today = AppTime.Today;
         _year = today.Year;
         _month = today.Month;
@@ -33,7 +41,7 @@ public partial class CalendarViewModel : ViewModelBase
         var firstOfMonth = new DateOnly(Year, Month, 1);
         var daysInMonth = DateTime.DaysInMonth(Year, Month);
 
-        using var db = new AppDbContext();
+        using var db = _dbFactory();
         var since = firstOfMonth;
         var until = new DateOnly(Year, Month, daysInMonth);
 

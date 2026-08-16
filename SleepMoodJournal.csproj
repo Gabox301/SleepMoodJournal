@@ -49,4 +49,11 @@
     <AvaloniaResource Include="Assets\Images\**\*.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- El proyecto de tests vive dentro de esta carpeta y se excluye del build de la app. -->
+    <Compile Remove="SleepMoodJournal.Tests\**\*.cs" />
+    <EmbeddedResource Remove="SleepMoodJournal.Tests\**\*" />
+    <None Remove="SleepMoodJournal.Tests\**\*" />
+  </ItemGroup>
+
 </Project>

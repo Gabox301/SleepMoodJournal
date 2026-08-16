@@ -15,13 +15,22 @@ public class AppDbContext : DbContext
 
     public DbSet<DailyEntry> Entries => Set<DailyEntry>();
 
-    public AppDbContext()
-    {
-        Directory.CreateDirectory(Path.GetDirectoryName(DbPath)!);
-    }
+    public AppDbContext() { }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+    /// <summary>
+    /// Ctor pensado para tests/DI: permite apuntar a… otra base (ej. SQLite en
+    /// memoria) en lugar de la ruta fija de la app.
+    /// </summary>
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+    {
+        if (options.IsConfigured)
+            return;
+
+        Directory.CreateDirectory(Path.GetDirectoryName(DbPath)!);
         options.UseSqlite($"Data Source={DbPath}");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
