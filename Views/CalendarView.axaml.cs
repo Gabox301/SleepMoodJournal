@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+
 using SleepMoodJournal.ViewModels;
 
 namespace SleepMoodJournal.Views;

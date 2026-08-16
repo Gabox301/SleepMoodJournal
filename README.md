@@ -94,6 +94,21 @@ base SQLite automáticamente (`EnsureCreated`, sin migraciones formales).
 Si el modelo de datos crece o cambia, conviene migrar a
 `dotnet ef migrations add ...` en vez de `EnsureCreated`.
 
+## Lint y análisis estático
+
+Las reglas están en `.editorconfig` (analizadores de .NET + estilo del
+lenguaje) y, con `EnforceCodeStyleInBuild`, corren también en cada build.
+
+```bash
+# Verificar sin modificar código (exit != 0 si hay algo que corregir):
+dotnet format analyzers SleepMoodJournal.csproj --verify-no-changes
+dotnet format style SleepMoodJournal.csproj --verify-no-changes
+dotnet format whitespace SleepMoodJournal.csproj --verify-no-changes
+
+# Aplicar correcciones automáticamente:
+dotnet format SleepMoodJournal.csproj
+```
+
 ## Generar ejecutable single-file
 
 Para probar o distribuir la app como un único `.exe` **auto-contenido** para

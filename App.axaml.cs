@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+
 using SleepMoodJournal.Data;
 using SleepMoodJournal.ViewModels;
 using SleepMoodJournal.Views;

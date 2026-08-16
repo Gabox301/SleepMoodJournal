@@ -1,6 +1,7 @@
-using Avalonia;
 using System;
 using System.IO;
+
+using Avalonia;
 
 namespace SleepMoodJournal;
 

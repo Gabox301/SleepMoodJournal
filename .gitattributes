@@ -1,0 +1,11 @@
+# Normalizar los archivos de texto a LF (como ya está el repositorio) para que
+# `dotnet format whitespace` sea estable en cualquier sistema operativo.
+* text=auto
+*.cs text eol=lf
+*.axaml text eol=lf
+*.xaml text eol=lf
+*.csproj text eol=lf
+*.slnx text eol=lf
+*.editorconfig text eol=lf
+*.md text eol=lf
+*.json text eol=lf

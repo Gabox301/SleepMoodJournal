@@ -11,6 +11,9 @@
     <!-- Disable compiled bindings temporarily to avoid InvalidCastException introduced by compiled XAML after the redesign. -->
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <RootNamespace>SleepMoodJournal</RootNamespace>
+    <!-- Lint: los analizadores de .NET y las reglas de estilo (ver .editorconfig) corren también en cada build. -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
 
   <ItemGroup>
